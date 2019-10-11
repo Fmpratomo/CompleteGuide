@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const http = require('http')
+
 
 const feedRoutes = require('./routes/feed')
 
@@ -18,4 +20,11 @@ app.use((req,res,next) => {
 
 app.use('/feed',feedRoutes);
 
-app.listen(8083);
+const port = process.env.PORT || 8083;
+const server = http.createServer(app);
+
+
+server.listen(port, () => {
+    //    let's print a message when the server run successfully
+    console.log("Server restarted successfully")
+});
